@@ -1,18 +1,18 @@
 package assignment1;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class Student {
 
 	private String uniqueId;
-	private String answer;
-	private String type;
+	private ArrayList<String> answer;
+	private static ArrayList<String> collectAnswer = new ArrayList<String>();
 	
-	public Student(String id, String type)
+	public Student(String id)
 	{
 		this.uniqueId = id;
-		this.type = type;
-		computeAnswer();
 	}
 	
 	public String getId()
@@ -20,30 +20,46 @@ public class Student {
 		return uniqueId;
 	}
 	
-	public String getType()
+	public ArrayList<String> submitAnswer(Question question) 
 	{
-		return type;
-	}
-	
-	public String computeAnswer() {
-		//Multiple
-		String[] choices = {"A", "B", "C", "D", "E"};
-		
-		//Single
-		String[] choices2 = {"0", "1"};
-		
-		if (type == "Single")
+		//If question object is Single Choice
+		if (question.single())
 		{
-			answer = choices2[(int)(new Random().nextInt(2))]; 
+			answer = new ArrayList<String>(question.getAnswers());
+			Collections.shuffle(answer);
+			
+			/*Fix this part */
+			answer.remove(0);
+			
+			collectAnswer.add(answer.get(0));
 		}
-		else
+		//If question object is Multiple Choice
+		else if(!(question.single()))
 		{
-			answer = choices[(int)(new Random().nextInt(5))];
+			answer = new ArrayList<String>(question.getAnswers());
+			Collections.shuffle(answer);
+			for (int i = answer.size() - 1; i > (int)(new Random().nextInt(answer.size()) + 1); i--)
+			{
+				answer.remove(i);
+			}
+			
+			for (int i = 0; i < answer.size(); ++i)
+			{
+				if (answer.get(i) != null)
+				{
+					collectAnswer.add(answer.get(i));
+				}
+			}
 		}
 		return answer;
 	}
 	
-	public String getAnswer() {
+	public ArrayList<String> getAnswer() {
 		return answer;
+	}
+	
+	public static ArrayList<String> returnCollected() 
+	{
+		return collectAnswer;
 	}
 }
