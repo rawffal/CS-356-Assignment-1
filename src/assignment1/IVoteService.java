@@ -1,11 +1,16 @@
 package assignment1;
 
-import java.util.Hashtable;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class IVoteService {
 
-	private Hashtable<String, Integer> table = new Hashtable<String, Integer>();
+	private Map<String, Integer> table = new TreeMap<String, Integer>();
 	
+	public IVoteService()
+	{
+		
+	}
 	
 	public void printCounter() 
 	{
@@ -18,14 +23,10 @@ public class IVoteService {
 			}
 			else
 			{
-				table.put(Student.returnCollected().get(i), table.get(Student.returnCollected().get(i)) + 1);
-				
+				table.put(Student.returnCollected().get(i), table.get(Student.returnCollected().get(i)) + 1);		
 			}
 		}
-		
-		System.out.println(table);
-		
+		System.out.println(table);	
 	}
-
 }
 

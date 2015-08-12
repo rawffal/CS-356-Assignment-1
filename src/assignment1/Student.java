@@ -27,10 +27,7 @@ public class Student {
 		{
 			answer = new ArrayList<String>(question.getAnswers());
 			Collections.shuffle(answer);
-			
-			/*Fix this part */
 			answer.remove(0);
-			
 			collectAnswer.add(answer.get(0));
 		}
 		//If question object is Multiple Choice
@@ -51,6 +48,7 @@ public class Student {
 				}
 			}
 		}
+		Collections.sort(answer);
 		return answer;
 	}
 	
