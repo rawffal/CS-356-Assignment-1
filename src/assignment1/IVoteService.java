@@ -7,25 +7,23 @@ public class IVoteService {
 
 	private Map<String, Integer> table = new TreeMap<String, Integer>();
 	
-	
-	public IVoteService()
-	{
-		
-	}
-	
+	/* This method will take in the students' unique Id and traverse through the answers
+	 * to check if it submitted their answer more than once. If that student did it more
+	 * than once, they will update with the latest submission */
 	public void printCounter() 
 	{
-		
-//		for (int i = 0; i < Student.returnCollected().size(); ++i)
 		for (String id : Student.returnCollected().keySet())
 		{
-			if (!(table.containsKey(Student.returnCollected().get(id))))
+			for (int i = 0; i < Student.returnCollected().get(id).size(); ++i)
 			{
-				table.put(Student.returnCollected().get(id), 1);
-			}
-			else
-			{
-				table.put(Student.returnCollected().get(id), table.get(Student.returnCollected().get(id)) + 1);
+				if (!(table.containsKey(Student.returnCollected().get(id).get(i))))
+				{
+					table.put(Student.returnCollected().get(id).get(i), 1);
+				}
+				else
+				{
+					table.put(Student.returnCollected().get(id).get(i), table.get(Student.returnCollected().get(id).get(i)) + 1);
+				}
 			}
 		}
 		System.out.println(table);

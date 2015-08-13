@@ -5,11 +5,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * The student class mainly has its own unique identification and it has to
+ * be able to submit answers to the IVoteService provider in order to 
+ * create statistics. 
+ * @author Charles Chuong
+ *
+ */
+
 public class Student {
 
 	private String uniqueId;
 	private ArrayList<String> answer;
-	private static HashMap<String, String> collectAnswer = new HashMap<String, String>();
+	private static HashMap<String, ArrayList<String>> collectAnswer = new HashMap<String, ArrayList<String>>();
 	
 	public Student(String id)
 	{
@@ -21,6 +29,9 @@ public class Student {
 		return uniqueId;
 	}
 	
+	/* This method will determine whether the answer being submitted is for a single choice
+	 * or a multiple choice question. It will store the answers in one array list for the
+	 * individual student and another array list for the collection.*/
 	public ArrayList<String> submitAnswer(Question question) 
 	{
 		//If question object is Single Choice
@@ -29,7 +40,7 @@ public class Student {
 			answer = new ArrayList<String>(question.getAnswers());
 			Collections.shuffle(answer);
 			answer.remove(0);
-			collectAnswer.put(getId(), answer.get(0));
+			collectAnswer.put(getId(), answer);
 		}
 		//If question object is Multiple Choice
 		else if(!(question.single()))
@@ -45,7 +56,7 @@ public class Student {
 			{
 				if (answer.get(i) != null)
 				{
-					collectAnswer.put(getId(), answer.get(i));
+					collectAnswer.put(getId(), answer);
 				}
 			}
 		}
@@ -57,7 +68,7 @@ public class Student {
 		return answer;
 	}
 	
-	public static HashMap<String, String> returnCollected() 
+	public static HashMap<String, ArrayList<String>> returnCollected() 
 	{
 		return collectAnswer;
 	}

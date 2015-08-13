@@ -2,6 +2,12 @@ package assignment1;
 
 import java.util.ArrayList;
 
+/**
+ * This class implements the Question interface for the main purpose of
+ * determining multiple choice answers.
+ * @author Charles Chuong
+ *
+ */
 public class MultipleChoiceQuestion implements Question {
 
 	
@@ -16,19 +22,16 @@ public class MultipleChoiceQuestion implements Question {
 	
 	@Override
 	public String getQuestion() {
-		// TODO Auto-generated method stub
 		return this.question;
 	}
 
 	@Override
 	public ArrayList<String> getAnswers() {
-		// TODO Auto-generated method stub
 		return this.answerChoices;
 	}
 
 	@Override
 	public boolean single() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
