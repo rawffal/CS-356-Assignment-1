@@ -3,6 +3,13 @@ package assignment1;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * This class will take in the submitted answers from the Student
+ * and will create results based on the answers.
+ * @author Charles Chuong
+ *
+ */
+
 public class IVoteService {
 
 	private Map<String, Integer> table = new TreeMap<String, Integer>();
