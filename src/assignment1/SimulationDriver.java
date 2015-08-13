@@ -7,24 +7,24 @@ public class SimulationDriver {
 	
 	public static void main(String[] args)
 	{	
-		
 		/* 1) create a question type and configure the answers */
-		String question = "How many licks does it take to get to the center of a tootsie pop? ";
-		ArrayList<String> answerBanks = new ArrayList<String>();
-		answerBanks.add("A. 10");
-		answerBanks.add("B. 20");
-		answerBanks.add("C. 30");
-		answerBanks.add("D. 40");
-		answerBanks.add("E. 50");
-		
-		Question mQuestion = new MultipleChoiceQuestion(question, answerBanks);
-		
-//		String question = "Yes or No";
+//		String question = "How many licks does it take to get to the center of a tootsie pop? ";
 //		ArrayList<String> answerBanks = new ArrayList<String>();
-//		answerBanks.add("Yes");
-//		answerBanks.add("No");
+//		answerBanks.add("A. 10");
+//		answerBanks.add("B. 20");
+//		answerBanks.add("C. 30");
+//		answerBanks.add("D. 40");
+//		answerBanks.add("E. 50");
 //		
-//		Question sQuestion = new SingleChoiceQuestion(question, answerBanks);
+//		Question mQuestion = new MultipleChoiceQuestion(question, answerBanks);
+		
+		String question = "Yes or No?";
+		ArrayList<String> answerBanks = new ArrayList<String>();
+		answerBanks.add("Yes");
+		answerBanks.add("No");
+		
+		Question sQuestion = new SingleChoiceQuestion(question, answerBanks);
+		System.out.println(sQuestion.getQuestion());
 		
 		/* 2) Configure the question for iVote Service */
 		IVoteService iVote = new IVoteService();
@@ -32,7 +32,7 @@ public class SimulationDriver {
 		/* 3) Randomly generate a number students and the answers */
 		int randomSize = (int)(new Random().nextInt(60) + 1);
 		Student student[] = new Student[randomSize];
-		System.out.println(randomSize);
+		System.out.println("Total student size: " + randomSize);
 		
 		/* 4) Submit all the students' answers to iVote Service */
 		int randomStudents = (int)(new Random().nextInt(randomSize));
@@ -40,15 +40,16 @@ public class SimulationDriver {
 		
 		for (int i = 0; i < student.length; ++i)
 		{
-			student[i] = new Student("" + i);
-			
+			student[i] = new Student("ID#" + i);
 		}
 			
 		for (int i = 0; i < randomStudents; ++i)
 		{
+			//Number of students participating from the class
 			randomNumber = (int)(new Random().nextInt(randomStudents));
-			student[randomNumber].submitAnswer(mQuestion);
-//			student[i].submitAnswer(sQuestion);
+//			student[randomNumber].submitAnswer(mQuestion);
+			
+			student[randomNumber].submitAnswer(sQuestion);
 			System.out.println("Student: " + student[randomNumber].getId() + "\t|\t Answer: " + student[randomNumber].getAnswer());
 		}
 		

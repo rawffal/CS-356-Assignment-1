@@ -2,13 +2,14 @@ package assignment1;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Student {
 
 	private String uniqueId;
 	private ArrayList<String> answer;
-	private static ArrayList<String> collectAnswer = new ArrayList<String>();
+	private static HashMap<String, String> collectAnswer = new HashMap<String, String>();
 	
 	public Student(String id)
 	{
@@ -28,7 +29,7 @@ public class Student {
 			answer = new ArrayList<String>(question.getAnswers());
 			Collections.shuffle(answer);
 			answer.remove(0);
-			collectAnswer.add(answer.get(0));
+			collectAnswer.put(getId(), answer.get(0));
 		}
 		//If question object is Multiple Choice
 		else if(!(question.single()))
@@ -44,7 +45,7 @@ public class Student {
 			{
 				if (answer.get(i) != null)
 				{
-					collectAnswer.add(answer.get(i));
+					collectAnswer.put(getId(), answer.get(i));
 				}
 			}
 		}
@@ -56,7 +57,7 @@ public class Student {
 		return answer;
 	}
 	
-	public static ArrayList<String> returnCollected() 
+	public static HashMap<String, String> returnCollected() 
 	{
 		return collectAnswer;
 	}
